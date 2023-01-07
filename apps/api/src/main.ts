@@ -1,18 +1,17 @@
-/**
- * This is not a production server yet!
- * This is only a minimal backend to get started.
- */
+import app from './app/server';
+import connect from './app/database';
 
-import * as express from 'express';
+async function bootstrap(): Promise<any> {
+  try {
+    const port = process.env.API_PORT || 8080;
+    const connectionString = process.env.API_CONNECTION_STRING;
+    const message = `Listening at http://localhost:${port}`;
 
-const app = express();
+    await connect(connectionString);
+    await app.listen(port, () => console.log(message))
+  } catch (err) {
+    console.error(err);
+  }
+}
 
-app.get('/api', (req, res) => {
-  res.send({ message: 'Welcome to api!' });
-});
-
-const port = process.env.port || 3333;
-const server = app.listen(port, () => {
-  console.log(`Listening at http://localhost:${port}/api`);
-});
-server.on('error', console.error);
+bootstrap();
