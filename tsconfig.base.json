@@ -16,6 +16,7 @@
     "baseUrl": ".",
     "paths": {
       "@the-mean-blog/api/categories": ["libs/api/categories/src/index.ts"],
+      "@the-mean-blog/api/testing": ["libs/api/testing/src/index.ts"],
       "@the-mean-blog/api/users": ["libs/api/users/src/index.ts"]
     }
   },

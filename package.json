@@ -5,8 +5,8 @@
   "scripts": {
     "start": "nx serve",
     "build": "nx build",
-    "test": "nx test",
-    "server": "nx serve api"
+    "test:categories": "nx test api-categories --watch",
+    "api": "nx serve api"
   },
   "private": true,
   "dependencies": {
@@ -30,7 +30,8 @@
     "@typescript-eslint/parser": "~5.18.0",
     "eslint": "~8.12.0",
     "eslint-config-prettier": "8.1.0",
-    "jest": "27.5.1",
+    "jest": "^27.5.1",
+    "mongodb-memory-server": "^8.11.0",
     "nx": "14.1.5",
     "prettier": "^2.5.1",
     "ts-jest": "27.1.4",

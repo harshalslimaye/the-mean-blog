@@ -4,6 +4,7 @@
   "projects": {
     "api": "apps/api",
     "api-categories": "libs/api/categories",
+    "api-testing": "libs/api/testing",
     "api-users": "libs/api/users"
   }
 }

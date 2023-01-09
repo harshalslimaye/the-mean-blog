@@ -1,11 +1,11 @@
 import { Request, Router, Response } from 'express';
-import { Category } from './model';
+import controller from './controller';
 
 const router = Router();
 
 router.get('/', async (req: Request, res: Response) => {
   try {
-    const categories = await Category.find();
+    const categories = await controller.get();
 
     res.status(200).json(categories);
   } catch (error) {
@@ -15,7 +15,7 @@ router.get('/', async (req: Request, res: Response) => {
 
 router.get('/:id', async (req: Request, res: Response) => {
   try {
-    const category = await Category.findById(req.params['id']);
+    const category = await controller.getById(req.params['id'])
 
     res.status(200).json(category);
   } catch (error) {
@@ -25,11 +25,7 @@ router.get('/:id', async (req: Request, res: Response) => {
 
 router.post('/', async (req: Request, res: Response) => {
   try {
-    const p = new Category({
-      name: req.body.name,
-      description: req.body.description,
-    });
-    const category = await p.save();
+    const category = await controller.create(req.body);
 
     res.status(201).json(category);
   } catch (error) {
@@ -39,14 +35,7 @@ router.post('/', async (req: Request, res: Response) => {
 
 router.put('/:id', async (req: Request, res: Response) => {
   try {
-    const updated = await Category.findByIdAndUpdate(
-      req.params['id'],
-      {
-        name: req.body.name,
-        description: req.body.description,
-      },
-      { new: true }
-    );
+    const updated = await controller.update(req.body, req.params['id']);
 
     res.status(200).json(updated);
   } catch (error) {
@@ -56,7 +45,7 @@ router.put('/:id', async (req: Request, res: Response) => {
 
 router.delete('/:id', async (req: Request, res: Response) => {
   try {
-    const deleted = await Category.findByIdAndDelete(req.params['id']);
+    const deleted = await controller.delete(req.params['id']);
 
     res.status(200).json(deleted);
   } catch (error) {
